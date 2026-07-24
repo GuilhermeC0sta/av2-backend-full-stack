@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 
+const authRoutes = require("./routes/authRoutes");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -25,8 +26,10 @@ app.get("/", (req, res) => {
   });
 });
 
-// As rotas de recursos (auth e lancamentos) serao registradas aqui
-// nas proximas partes do projeto.
+// Rotas de autenticacao (cadastro e login).
+app.use("/api/auth", authRoutes);
+
+// As rotas de lancamentos serao registradas aqui na proxima parte.
 
 // Middlewares de tratamento de erro devem ficar por ultimo.
 app.use(notFound);
