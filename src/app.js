@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const authRoutes = require("./routes/authRoutes");
+const lancamentoRoutes = require("./routes/lancamentoRoutes");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -26,10 +27,11 @@ app.get("/", (req, res) => {
   });
 });
 
-// Rotas de autenticacao (cadastro e login).
+// Rotas de autenticacao (cadastro e login) - publicas.
 app.use("/api/auth", authRoutes);
 
-// As rotas de lancamentos serao registradas aqui na proxima parte.
+// Rotas do recurso principal (lancamentos) - protegidas por JWT.
+app.use("/api/lancamentos", lancamentoRoutes);
 
 // Middlewares de tratamento de erro devem ficar por ultimo.
 app.use(notFound);
